@@ -1,14 +1,11 @@
-using System.Linq.Expressions;
 using System.Text.Json;
 using LiveSale.Callscripts.Api.Converters;
-using LiveSale.Callscripts.Api.Models.Widgets;
-using LiveSale.Callscripts.Api.Models.Widgets.Visual;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace LiveSale.Callscripts.Api
 {
@@ -38,6 +35,8 @@ namespace LiveSale.Callscripts.Api
 					Version = "v1"
 				});
 			});
+
+			services.AddMediatR(typeof(Startup));
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

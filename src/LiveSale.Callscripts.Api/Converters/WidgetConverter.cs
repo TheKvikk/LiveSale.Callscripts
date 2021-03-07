@@ -2,19 +2,19 @@ using System;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using LiveSale.Callscripts.Api.Models.Widgets;
-using LiveSale.Callscripts.Api.Models.Widgets.Visual;
+using LiveSale.Callscripts.Api.Dtos.Widgets;
+using LiveSale.Callscripts.Api.Dtos.Widgets.Visual;
 
 namespace LiveSale.Callscripts.Api.Converters
 {
-	public class WidgetConverter : JsonConverter<Widget>
+	public class WidgetConverter : JsonConverter<WidgetDto>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return typeof(Widget).IsAssignableFrom(typeToConvert);
+			return typeof(WidgetDto).IsAssignableFrom(typeToConvert);
 		}
 
-		public override Widget Read(
+		public override WidgetDto Read(
 			ref Utf8JsonReader reader,
 			Type typeToConvert,
 			JsonSerializerOptions options)
@@ -31,7 +31,7 @@ namespace LiveSale.Callscripts.Api.Converters
 				throw new JsonException();
 			}
 
-			string? propertyName = reader.GetString();
+			var propertyName = reader.GetString();
 
 			if (propertyName != "Type")
 			{
@@ -46,11 +46,11 @@ namespace LiveSale.Callscripts.Api.Converters
 			}
 
 			var typeDiscriminator = reader.GetString();
-			Widget widget = typeDiscriminator switch
+			WidgetDto widget = typeDiscriminator switch
 			{
-				"simpletext" => new SimpleText(),
-				"imagetext" => new ImageWithText(),
-				"image" => new Image(),
+				"simpletext" => new SimpleTextDto(),
+				"imagetext" => new ImageWithTextDto(),
+				"image" => new ImageDto(),
 				_ => throw new JsonException()
 			};
 
@@ -71,11 +71,12 @@ namespace LiveSale.Callscripts.Api.Converters
 						case "Extra":
 							var type = widget.Type switch
 							{
-								"simpletext" => typeof(SimpleTextExtra),
-								"imagetext" => typeof(ImageWithTextExtra),
-								"image" => typeof(ImageExtra),
+								"simpletext" => typeof(SimpleTextExtraDto),
+								"imagetext" => typeof(ImageWithTextExtraDto),
+								"image" => typeof(ImageExtraDto),
 								_ => throw new ArgumentOutOfRangeException()
 							};
+
 							var extra = JsonSerializer.Deserialize(ref reader, type, options);
 							widget.GetType().GetProperty("Extra")?.SetValue(widget, extra);
 							break;
@@ -88,7 +89,7 @@ namespace LiveSale.Callscripts.Api.Converters
 
 		public override void Write(
 			Utf8JsonWriter writer,
-			Widget widget,
+			WidgetDto widget,
 			JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();

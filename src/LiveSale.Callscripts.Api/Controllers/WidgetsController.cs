@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using LiveSale.Callscripts.Api.Models.Widgets;
-using LiveSale.Callscripts.Api.Models.Widgets.Visual;
+using LiveSale.Callscripts.Api.Dtos.Widgets;
+using LiveSale.Callscripts.Api.Dtos.Widgets.Visual;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiveSale.Callscripts.Api.Controllers
@@ -9,15 +9,15 @@ namespace LiveSale.Callscripts.Api.Controllers
 	[Route("[controller]")]
 	public class WidgetsController : ControllerBase
 	{
-		private static readonly List<Widget> _widgets = new()
+		private static readonly List<WidgetDto> _widgets = new()
 		{
-			new SimpleText
+			new SimpleTextDto
 			{
 				Extra =
 				{
 					Values =
 					{
-						new SimpleTextValue
+						new SimpleTextValueDto
 						{
 							Id = "adsfsdgf",
 							Order = 1,
@@ -26,13 +26,13 @@ namespace LiveSale.Callscripts.Api.Controllers
 					}
 				}
 			},
-			new Image
+			new ImageDto
 			{
 				Extra =
 				{
 					Values =
 					{
-						new ImageValue
+						new ImageValueDto
 						{
 							Id = "adfsd",
 							ImageUrl =
@@ -42,13 +42,13 @@ namespace LiveSale.Callscripts.Api.Controllers
 					}
 				}
 			},
-			new ImageWithText
+			new ImageWithTextDto
 			{
 				Extra =
 				{
 					Values =
 					{
-						new ImageWithTextValue
+						new ImageWithTextValueDto
 						{
 							Id = "asdfsd",
 							ImageUrl =
@@ -63,7 +63,7 @@ namespace LiveSale.Callscripts.Api.Controllers
 		};
 
 		[HttpGet]
-		public IEnumerable<Widget> Get()
+		public IEnumerable<WidgetDto> Get()
 		{
 			return _widgets;
 		}
