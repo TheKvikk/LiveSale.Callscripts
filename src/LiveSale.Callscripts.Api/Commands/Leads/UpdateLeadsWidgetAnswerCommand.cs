@@ -4,12 +4,12 @@ namespace LiveSale.Callscripts.Api.Commands.Leads
 {
 	public class UpdateLeadsWidgetAnswerCommand : IRequest
 	{
-		public string LeadId { get; set; } = "";
+		public string LeadId { get; init; } = "";
 
-		public string PageId { get; } = "";
+		public string PageId { get; init; } = "";
 
-		public string WidgetId { get; } = "";
+		public string WidgetId { get; init; } = "";
 
-		public string Extra { get; } = "";
+		public string Extra { get; init; } = "";
 	}
 }

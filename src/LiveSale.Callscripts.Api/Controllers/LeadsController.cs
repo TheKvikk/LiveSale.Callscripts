@@ -36,21 +36,22 @@ namespace LiveSale.Callscripts.Api.Controllers
 			return Ok(response);
 		}
 
-		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateLead(string id, [FromBody] UpdateLeadsWidgetAnswerCommand command)
+		[HttpPatch("{id}/answer")]
+		public async Task<IActionResult> UpdateLeadsWidgetAnwser(string id,
+			[FromBody] UpdateLeadsWidgetAnswerCommand command)
 		{
 			if (string.IsNullOrEmpty(id) ||
 			    string.IsNullOrEmpty(command.PageId) ||
 			    string.IsNullOrEmpty(command.WidgetId) ||
-			    string.IsNullOrEmpty(command.Extra))
+			    string.IsNullOrEmpty(command.Extra) ||
+			    id != command.LeadId)
 			{
 				return BadRequest();
 			}
 
-			command.LeadId = id;
 			await _mediator.Publish(command);
 
-			return Ok();
+			return NoContent();
 		}
 	}
 }
