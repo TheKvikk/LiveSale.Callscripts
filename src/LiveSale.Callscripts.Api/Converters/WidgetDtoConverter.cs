@@ -51,6 +51,7 @@ namespace LiveSale.Callscripts.Api.Converters
 				"simpletext" => new SimpleTextDto(),
 				"imagetext" => new ImageWithTextDto(),
 				"image" => new ImageDto(),
+				"range" => new RangeDto(),
 				_ => throw new JsonException()
 			};
 
@@ -74,11 +75,17 @@ namespace LiveSale.Callscripts.Api.Converters
 								"simpletext" => typeof(SimpleTextExtraDto),
 								"imagetext" => typeof(ImageWithTextExtraDto),
 								"image" => typeof(ImageExtraDto),
+								"range" => typeof(RangeExtraDto),
 								_ => throw new ArgumentOutOfRangeException()
 							};
 
 							var extra = JsonSerializer.Deserialize(ref reader, type, options);
 							widget.GetType().GetProperty("Extra")?.SetValue(widget, extra);
+							break;
+						default:
+							var propertyType = widget.GetType().GetProperty(propertyName).PropertyType;
+							var value = JsonSerializer.Deserialize(ref reader, propertyType, options);
+							widget.GetType().GetProperty(propertyName)?.SetValue(widget, value);
 							break;
 					}
 				}

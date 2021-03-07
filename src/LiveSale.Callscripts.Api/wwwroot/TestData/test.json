@@ -1,6 +1,6 @@
 {
   "Id": "602a5c68170dfa40b173822a",
-  "CallscriptId": "602a5c68170dfa40b172222a",
+  "CallscriptId": "60453c53cd86b86ffdb36ce4",
   "PaginationType": "vertical",
   "DateCreated": "2021-03-07T19:25:00.023832+01:00",
   "DateUpdated": "2021-03-07T19:25:00.023832+01:00",
@@ -38,14 +38,14 @@
   ],
   "Pages": [
     {
-      "Id": "6022aa8e981bd1c2f069c22d",
+      "Id": "60453c4ab5c8894f0493b5e7",
       "Order": 1,
       "Headline": "Software",
       "Widgets": [
         {
           "Type": "simpletext",
           "Subtype": "",
-          "Id": "603abcde",
+          "Id": "60453c431b6e5a41ea6e6865",
           "Order": 1,
           "Required": true,
           "Valid": false,
@@ -64,12 +64,12 @@
         {
           "Type": "image",
           "Subtype": "",
-          "Id": null,
+          "Id": "60453c39054b40933aa75148",
           "Order": 1,
           "Required": true,
           "Valid": false,
           "HeaderText": "",
-          "HoteText": "",
+          "NoteText": "",
           "Extra": {
             "Values": [
               {
@@ -83,7 +83,7 @@
         {
           "Type": "imagetext",
           "Subtype": "",
-          "Id": null,
+          "Id": "60453c1d49bc7735a8d69531",
           "Order": 1,
           "Required": true,
           "Valid": false,
@@ -99,6 +99,29 @@
                 "Order": 1
               }
             ]
+          }
+        },
+        {
+          "Type": "range",
+          "Subtype": "",
+          "Id": "5fc8ad9c58101c52b9dff004",
+          "Order": 30,
+          "Required": false,
+          "Valid": true,
+          "HeaderText": "Produktové zaměření",
+          "NoteText": "Textik pod nadpisem",
+          "Extra": {
+            "Value": {
+              "Parts": [
+                "Domácnosti",
+                "Firmy"
+              ],
+              "Values": [
+                50,
+                50
+              ]
+            },
+            "Answer": {}
           }
         }
       ]

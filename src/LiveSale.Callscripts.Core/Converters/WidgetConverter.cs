@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using LiveSale.Callscripts.Core.Models.Widgets;
 using LiveSale.Callscripts.Core.Models.Widgets.Visual;
+using Range = LiveSale.Callscripts.Core.Models.Widgets.Range;
 
 namespace LiveSale.Callscripts.Core.Converters
 {
@@ -51,6 +52,7 @@ namespace LiveSale.Callscripts.Core.Converters
 				"simpletext" => new SimpleText(),
 				"imagetext" => new ImageWithText(),
 				"image" => new Image(),
+				"range" => new Range(),
 				_ => throw new JsonException()
 			};
 
@@ -74,11 +76,17 @@ namespace LiveSale.Callscripts.Core.Converters
 								"simpletext" => typeof(SimpleTextExtra),
 								"imagetext" => typeof(ImageWithTextExtra),
 								"image" => typeof(ImageExtra),
+								"range" => typeof(RangeExtra),
 								_ => throw new ArgumentOutOfRangeException()
 							};
 
 							var extra = JsonSerializer.Deserialize(ref reader, type, options);
 							widget.GetType().GetProperty("Extra")?.SetValue(widget, extra);
+							break;
+						default:
+							var propertyType = widget.GetType().GetProperty(propertyName).PropertyType;
+							var value = JsonSerializer.Deserialize(ref reader, propertyType, options);
+							widget.GetType().GetProperty(propertyName)?.SetValue(widget, value);
 							break;
 					}
 				}

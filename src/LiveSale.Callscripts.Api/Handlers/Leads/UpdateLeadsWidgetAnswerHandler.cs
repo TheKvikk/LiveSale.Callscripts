@@ -6,8 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using LiveSale.Callscripts.Api.Commands.Leads;
 using LiveSale.Callscripts.Api.Converters;
-using LiveSale.Callscripts.Api.Dtos.Leads;
-using LiveSale.Callscripts.Api.Dtos.Widgets.Visual;
+using LiveSale.Callscripts.Core.Models.Widgets;
+using LiveSale.Callscripts.Core.Models.Widgets.Visual;
+using LiveSale.Callscripts.Core.Repositories.Leads;
 using MediatR;
 
 namespace LiveSale.Callscripts.Api.Handlers.Leads
@@ -15,19 +16,27 @@ namespace LiveSale.Callscripts.Api.Handlers.Leads
 	public class UpdateLeadsWidgetAnswerHandler : IRequestHandler<UpdateLeadsWidgetAnswerCommand>
 	{
 		private static readonly JsonSerializerOptions _serializerOptions = new()
-			{Converters = {new WidgetDtoConverter()}};
+			{PropertyNameCaseInsensitive = true, Converters = {new WidgetDtoConverter()}};
 
-		private readonly Dictionary<string, Type> _widgetExtras = new()
+		private static readonly Dictionary<string, Type> _widgetExtras = new()
 		{
-			{"simpletext", typeof(SimpleTextExtraDto)},
-			{"imagetext", typeof(ImageWithTextExtraDto)},
-			{"image", typeof(ImageExtraDto)}
+			{"simpletext", typeof(SimpleTextExtra)},
+			{"imagetext", typeof(ImageWithTextExtra)},
+			{"image", typeof(ImageExtra)},
+			{"range", typeof(RangeExtra)}
 		};
+
+		private readonly LeadRepository _leadRepository;
+
+		public UpdateLeadsWidgetAnswerHandler(LeadRepository leadRepository)
+		{
+			_leadRepository = leadRepository;
+		}
 
 		// TODO make some null ref validations
 		public async Task<Unit> Handle(UpdateLeadsWidgetAnswerCommand request, CancellationToken cancellationToken)
 		{
-			var lead = new LeadDto(); // TODO load from DB
+			var lead = _leadRepository.GetLeadById(request.LeadId);
 			var widget = lead.Pages
 				.SingleOrDefault(page => page.Id == request.PageId)
 				.Widgets
@@ -38,7 +47,7 @@ namespace LiveSale.Callscripts.Api.Handlers.Leads
 			var extra = JsonSerializer.Deserialize(request.Extra, type, _serializerOptions);
 			widget.GetType().GetProperty("Extra")?.SetValue(widget, extra);
 
-			// TODO save lead
+			_leadRepository.Update(lead);
 
 			return await Task.FromResult(new Unit());
 		}

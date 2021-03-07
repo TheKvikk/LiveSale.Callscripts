@@ -24,6 +24,7 @@
 
     <ItemGroup>
       <EmbeddedResource Include="wwwroot\TestData\test.json" />
+      <EmbeddedResource Include="wwwroot\TestData\test_for_write_only.json" />
     </ItemGroup>
 
 </Project>

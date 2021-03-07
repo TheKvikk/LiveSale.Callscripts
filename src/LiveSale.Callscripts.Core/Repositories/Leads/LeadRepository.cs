@@ -9,7 +9,7 @@ namespace LiveSale.Callscripts.Core.Repositories.Leads
 	public class LeadRepository
 	{
 		private static readonly JsonSerializerOptions _serializerOptions = new()
-			{Converters = {new WidgetConverter()}};
+			{PropertyNameCaseInsensitive = true, WriteIndented = true, Converters = {new WidgetConverter()}};
 
 		private readonly IWebHostEnvironment _environment;
 
@@ -23,6 +23,14 @@ namespace LiveSale.Callscripts.Core.Repositories.Leads
 			var json = File.ReadAllText(Path.Combine(_environment.WebRootPath, "TestData/test.json"));
 
 			return JsonSerializer.Deserialize<Lead>(json, _serializerOptions);
+		}
+		
+		public Lead Update(Lead lead)
+		{
+			var json = JsonSerializer.Serialize(lead, _serializerOptions);
+			File.WriteAllText(Path.Combine(_environment.WebRootPath, "TestData/test_for_write_only.json"), json);
+
+			return lead;
 		}
 	}
 }

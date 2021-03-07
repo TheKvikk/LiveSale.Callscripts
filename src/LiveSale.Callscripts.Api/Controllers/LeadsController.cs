@@ -49,7 +49,7 @@ namespace LiveSale.Callscripts.Api.Controllers
 				return BadRequest();
 			}
 
-			await _mediator.Publish(command);
+			_ = await _mediator.Send(command);
 
 			return NoContent();
 		}

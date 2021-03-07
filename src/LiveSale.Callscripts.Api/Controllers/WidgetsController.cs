@@ -59,6 +59,17 @@ namespace LiveSale.Callscripts.Api.Controllers
 						}
 					}
 				}
+			},
+			new RangeDto
+			{
+				Extra =
+				{
+					Value =
+						new()
+						{
+							Parts = new[] {"Domácnosti", "Firmy"}
+						}
+				}
 			}
 		};
 
