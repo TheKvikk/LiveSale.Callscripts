@@ -14,8 +14,9 @@ namespace LiveSale.Callscripts.Api.Handlers.Leads
 {
 	public class UpdateLeadsWidgetAnswerHandler : IRequestHandler<UpdateLeadsWidgetAnswerCommand>
 	{
-		private readonly JsonSerializerOptions _serializerOptions = new()
-			{Converters = {new WidgetConverter()}};
+		private static readonly JsonSerializerOptions _serializerOptions = new()
+			{Converters = {new WidgetDtoConverter()}};
+
 		private readonly Dictionary<string, Type> _widgetExtras = new()
 		{
 			{"simpletext", typeof(SimpleTextExtraDto)},
@@ -36,7 +37,7 @@ namespace LiveSale.Callscripts.Api.Handlers.Leads
 
 			var extra = JsonSerializer.Deserialize(request.Extra, type, _serializerOptions);
 			widget.GetType().GetProperty("Extra")?.SetValue(widget, extra);
-			
+
 			// TODO save lead
 
 			return await Task.FromResult(new Unit());

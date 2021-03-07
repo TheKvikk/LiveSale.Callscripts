@@ -15,6 +15,6 @@ namespace LiveSale.Callscripts.Core.Models.Callscripts
 
 		public string Headline { get; set; } = "";
 
-		public List<Widget> Widgets { get; } = new();
+		public List<Widget> Widgets { get; set; } = new();
 	}
 }

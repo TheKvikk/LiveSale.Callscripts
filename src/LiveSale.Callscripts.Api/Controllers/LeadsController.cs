@@ -27,6 +27,7 @@ namespace LiveSale.Callscripts.Api.Controllers
 
 			var query = new GetLeadQuery(id);
 			var response = await _mediator.Send(query);
+
 			if (response == null)
 			{
 				return NotFound();

@@ -4,16 +4,14 @@ namespace LiveSale.Callscripts.Core.Models.Callscripts
 {
 	public class CallscriptShared
 	{
-		public string Name { get; set; } = "";
-
 		public string PaginationType { get; set; } = "";
 
-		public Theme Theme { get; } = new();
+		public Theme Theme { get; set; } = new();
 
-		public SupportPagesSetting SupportPagesSetting { get; } = new();
+		public SupportPagesSetting SupportPagesSetting { get; set; } = new();
 
-		public List<Icon> IconSet { get; } = new();
+		public List<Icon> IconSet { get; set; } = new();
 
-		public List<Page> Pages { get; } = new();
+		public List<Page> Pages { get; set; } = new();
 	}
 }

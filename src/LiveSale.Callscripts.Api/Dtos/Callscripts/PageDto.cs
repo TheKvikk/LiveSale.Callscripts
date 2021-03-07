@@ -11,6 +11,6 @@ namespace LiveSale.Callscripts.Api.Dtos.Callscripts
 
 		public string Headline { get; set; } = "";
 
-		public List<WidgetDto> Widgets { get; } = new();
+		public List<WidgetDto> Widgets { get; set; } = new();
 	}
 }

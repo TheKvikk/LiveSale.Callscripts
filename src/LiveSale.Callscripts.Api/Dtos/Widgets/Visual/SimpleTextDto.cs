@@ -6,12 +6,12 @@ namespace LiveSale.Callscripts.Api.Dtos.Widgets.Visual
 	{
 		public override string Type => "simpletext";
 
-		public SimpleTextExtraDto Extra { get; } = new();
+		public SimpleTextExtraDto Extra { get; set; } = new();
 	}
 
 	public class SimpleTextExtraDto
 	{
-		public List<SimpleTextValueDto> Values { get; } = new();
+		public List<SimpleTextValueDto> Values { get; set; } = new();
 	}
 
 	public class SimpleTextValueDto : BaseValue

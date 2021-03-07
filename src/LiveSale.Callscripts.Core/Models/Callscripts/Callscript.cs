@@ -9,6 +9,8 @@ namespace LiveSale.Callscripts.Core.Models.Callscripts
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; init; } = null!;
 
+		public string Name { get; set; } = "";
+
 		public bool IsDeleted { get; set; }
 
 		public State State { get; set; } = State.Draft;

@@ -2,19 +2,19 @@ using System.Collections.Generic;
 
 namespace LiveSale.Callscripts.Core.Models.Widgets.Visual
 {
-	public class ImageDto : Widget, IWidgetExtra<ImageExtraDto>
+	public class Image : Widget, IWidgetExtra<ImageExtra>
 	{
 		public override string Type => "image";
 
-		public ImageExtraDto Extra { get; } = new();
+		public ImageExtra Extra { get; set; } = new();
 	}
 
-	public class ImageExtraDto
+	public class ImageExtra
 	{
-		public List<ImageValueDto> Values { get; } = new();
+		public List<ImageValue> Values { get; set; } = new();
 	}
 
-	public class ImageValueDto : BaseValue
+	public class ImageValue : BaseValue
 	{
 		public string ImageUrl { get; set; } = "";
 	}

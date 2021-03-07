@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 using LiveSale.Callscripts.Api.Dtos.Callscripts;
 
 namespace LiveSale.Callscripts.Api.Dtos.Leads
@@ -13,7 +14,7 @@ namespace LiveSale.Callscripts.Api.Dtos.Leads
 
 		public DateTime DateDue { get; set; }
 
-		public State State { get; set; } = State.Created;
+		[JsonIgnore] public State State { get; set; } = State.Created;
 
 		public int ActiveWidgetIndex { get; set; } = 0;
 

@@ -2,19 +2,19 @@ using System;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using LiveSale.Callscripts.Api.Dtos.Widgets;
-using LiveSale.Callscripts.Api.Dtos.Widgets.Visual;
+using LiveSale.Callscripts.Core.Models.Widgets;
+using LiveSale.Callscripts.Core.Models.Widgets.Visual;
 
-namespace LiveSale.Callscripts.Api.Converters
+namespace LiveSale.Callscripts.Core.Converters
 {
-	public class WidgetConverter : JsonConverter<WidgetDto>
+	public class WidgetConverter : JsonConverter<Widget>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return typeof(WidgetDto).IsAssignableFrom(typeToConvert);
+			return typeof(Widget).IsAssignableFrom(typeToConvert);
 		}
 
-		public override WidgetDto Read(
+		public override Widget Read(
 			ref Utf8JsonReader reader,
 			Type typeToConvert,
 			JsonSerializerOptions options)
@@ -46,11 +46,11 @@ namespace LiveSale.Callscripts.Api.Converters
 			}
 
 			var typeDiscriminator = reader.GetString();
-			WidgetDto widget = typeDiscriminator switch
+			Widget widget = typeDiscriminator switch
 			{
-				"simpletext" => new SimpleTextDto(),
-				"imagetext" => new ImageWithTextDto(),
-				"image" => new ImageDto(),
+				"simpletext" => new SimpleText(),
+				"imagetext" => new ImageWithText(),
+				"image" => new Image(),
 				_ => throw new JsonException()
 			};
 
@@ -71,9 +71,9 @@ namespace LiveSale.Callscripts.Api.Converters
 						case "Extra":
 							var type = widget.Type switch
 							{
-								"simpletext" => typeof(SimpleTextExtraDto),
-								"imagetext" => typeof(ImageWithTextExtraDto),
-								"image" => typeof(ImageExtraDto),
+								"simpletext" => typeof(SimpleTextExtra),
+								"imagetext" => typeof(ImageWithTextExtra),
+								"image" => typeof(ImageExtra),
 								_ => throw new ArgumentOutOfRangeException()
 							};
 
@@ -89,7 +89,7 @@ namespace LiveSale.Callscripts.Api.Converters
 
 		public override void Write(
 			Utf8JsonWriter writer,
-			WidgetDto widget,
+			Widget widget,
 			JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
@@ -106,6 +106,7 @@ namespace LiveSale.Callscripts.Api.Converters
 			writer.WriteString(policy?.ConvertName("NoteText") ?? "NoteText", widget.NoteText);
 
 			var extraProperty = widget.GetType().GetProperties().SingleOrDefault(property => property.Name == "Extra");
+
 			if (extraProperty != null)
 			{
 				writer.WritePropertyName(policy?.ConvertName("Extra") ?? "Extra");

@@ -9,6 +9,6 @@ namespace LiveSale.Callscripts.Core.Models.Widgets
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; init; } = null!;
 
-		public int Order { get; init; } = 1;
+		public int Order { get; set; } = 1;
 	}
 }

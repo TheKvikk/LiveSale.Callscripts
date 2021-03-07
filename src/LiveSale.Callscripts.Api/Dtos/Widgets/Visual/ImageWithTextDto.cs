@@ -6,12 +6,12 @@ namespace LiveSale.Callscripts.Api.Dtos.Widgets.Visual
 	{
 		public override string Type => "imagetext";
 
-		public ImageWithTextExtraDto Extra { get; } = new();
+		public ImageWithTextExtraDto Extra { get; set; } = new();
 	}
 
 	public class ImageWithTextExtraDto
 	{
-		public List<ImageWithTextValueDto> Values { get; } = new();
+		public List<ImageWithTextValueDto> Values { get; set; } = new();
 	}
 
 	public class ImageWithTextValueDto : BaseValue

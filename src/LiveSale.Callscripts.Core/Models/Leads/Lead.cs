@@ -11,6 +11,10 @@ namespace LiveSale.Callscripts.Core.Models.Leads
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; init; } = null!;
 
+		[BsonId]
+		[BsonRepresentation(BsonType.ObjectId)]
+		public string CallscriptId { get; init; }
+
 		public DateTime DateCreated { get; set; }
 
 		public DateTime DateUpdated { get; set; }
@@ -22,9 +26,5 @@ namespace LiveSale.Callscripts.Core.Models.Leads
 		public int ActiveWidgetIndex { get; set; } = 0;
 
 		public Contact Contact { get; set; } = new();
-
-		public bool Started => State == State.Started;
-
-		public bool Completed => State == State.Completed;
 	}
 }

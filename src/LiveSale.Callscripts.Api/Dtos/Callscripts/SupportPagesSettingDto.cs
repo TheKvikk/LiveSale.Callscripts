@@ -2,7 +2,8 @@ namespace LiveSale.Callscripts.Api.Dtos.Callscripts
 {
 	public class SupportPagesSettingDto
 	{
-		public SupportPageSettingDto Intro { get; } = new();
-		public SupportPageSettingDto Outro { get; } = new();
+		public SupportPageSettingDto Intro { get; set; } = new();
+
+		public SupportPageSettingDto Outro { get; set; } = new();
 	}
 }

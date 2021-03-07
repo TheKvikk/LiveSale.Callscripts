@@ -2,19 +2,19 @@ using System.Collections.Generic;
 
 namespace LiveSale.Callscripts.Core.Models.Widgets.Visual
 {
-	public class SimpleTextDto : Widget, IWidgetExtra<SimpleTextExtraDto>
+	public class SimpleText : Widget, IWidgetExtra<SimpleTextExtra>
 	{
 		public override string Type => "simpletext";
 
-		public SimpleTextExtraDto Extra { get; } = new();
+		public SimpleTextExtra Extra { get; set; } = new();
 	}
 
-	public class SimpleTextExtraDto
+	public class SimpleTextExtra
 	{
-		public List<SimpleTextValueDto> Values { get; } = new();
+		public List<SimpleTextValue> Values { get; set; } = new();
 	}
 
-	public class SimpleTextValueDto : BaseValue
+	public class SimpleTextValue : BaseValue
 	{
 		public string TextMarkdown { get; set; } = "";
 	}
