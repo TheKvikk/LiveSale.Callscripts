@@ -1,3 +1,5 @@
+using System;
+
 namespace LiveSale.Callscripts.Api.Dtos.Widgets
 {
 	public class RangeDto : WidgetDto, IWidgetExtra<RangeExtraDto>
@@ -16,7 +18,7 @@ namespace LiveSale.Callscripts.Api.Dtos.Widgets
 
 	public class RangeValueDto : BaseValue
 	{
-		public string[] Parts { get; set; }
+		public string[] Parts { get; set; } = Array.Empty<string>();
 
 		public int[] Values { get; set; } = {50, 50};
 	}

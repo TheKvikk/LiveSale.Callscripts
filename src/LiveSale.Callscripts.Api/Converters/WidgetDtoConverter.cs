@@ -83,9 +83,17 @@ namespace LiveSale.Callscripts.Api.Converters
 							widget.GetType().GetProperty("Extra")?.SetValue(widget, extra);
 							break;
 						default:
-							var propertyType = widget.GetType().GetProperty(propertyName).PropertyType;
-							var value = JsonSerializer.Deserialize(ref reader, propertyType, options);
-							widget.GetType().GetProperty(propertyName)?.SetValue(widget, value);
+							if (propertyName != null)
+							{
+								var propertyType = widget.GetType().GetProperty(propertyName)?.PropertyType;
+
+								if (propertyType != null)
+								{
+									var value = JsonSerializer.Deserialize(ref reader, propertyType, options);
+									widget.GetType().GetProperty(propertyName)?.SetValue(widget, value);
+								}
+							}
+
 							break;
 					}
 				}

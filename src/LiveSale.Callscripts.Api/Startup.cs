@@ -1,7 +1,8 @@
 using System.Net;
 using System.Text.Json;
-using LiveSale.Callscripts.Api.Commands.Leads;
+using FluentValidation.AspNetCore;
 using LiveSale.Callscripts.Api.Converters;
+using LiveSale.Callscripts.Api.Dtos.Requests;
 using LiveSale.Callscripts.Core.Repositories.Leads;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -28,25 +29,27 @@ namespace LiveSale.Callscripts.Api
 			services.Configure<ForwardedHeadersOptions>(options => options.KnownProxies.Add(IPAddress.Parse("10.10.1.1")));
 
 			services.AddRouting(options => options.LowercaseUrls = true);
-			services.AddControllers().AddJsonOptions(options =>
-			{
-				options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-				options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-				options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-				options.JsonSerializerOptions.Converters.Add(new WidgetDtoConverter());
-			});
+
+			services.AddControllers()
+				.AddFluentValidation(options =>
+					options.RegisterValidatorsFromAssembly(typeof(Startup).Assembly, lifetime: ServiceLifetime.Singleton))
+				.AddJsonOptions(options =>
+				{
+					options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+					options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+					options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+					options.JsonSerializerOptions.Converters.Add(new WidgetDtoConverter());
+				});
 
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new()
 				{
 					Title = "LiveSale.Callscripts.Api",
-					Version = "v1",
-					Contact = new()
-						{Name = "Martin Obadal", Email = "martin.obadal@livesale.cz"}
+					Version = "v1"
 				});
 
-				c.MapType<UpdateLeadsWidgetAnswerCommand>(() => new()
+				c.MapType<UpdateLeadsWidgetAnswerDto>(() => new()
 				{
 					Type = "string",
 					Example = new OpenApiString(

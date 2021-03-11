@@ -11,7 +11,7 @@ namespace LiveSale.Callscripts.Core.Models.Widgets
 	{
 		public RangeValue Value { get; set; } = new();
 
-		public RangeValue? Answer { get; set; }
+		public RangeValue Answer { get; set; } = new();
 	}
 
 	public class RangeValue : BaseValue

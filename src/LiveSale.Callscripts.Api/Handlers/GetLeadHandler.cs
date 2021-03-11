@@ -1,14 +1,15 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using LanguageExt;
 using LiveSale.Callscripts.Api.Dtos.Leads;
 using LiveSale.Callscripts.Api.Queries.Leads;
 using LiveSale.Callscripts.Core.Repositories.Leads;
 using MediatR;
 
-namespace LiveSale.Callscripts.Api.Handlers.Leads
+namespace LiveSale.Callscripts.Api.Handlers
 {
-	public class GetLeadHandler : IRequestHandler<GetLeadQuery, LeadDto?>
+	public class GetLeadHandler : IRequestHandler<GetLeadQuery, Option<LeadDto>>
 	{
 		private readonly LeadRepository _leadRepository;
 		private readonly IMapper _mapper;
@@ -21,17 +22,10 @@ namespace LiveSale.Callscripts.Api.Handlers.Leads
 			_leadRepository = leadRepository;
 		}
 
-		// TODO load from DB
-		public async Task<LeadDto?> Handle(GetLeadQuery request, CancellationToken cancellationToken)
+		public async Task<Option<LeadDto>> Handle(GetLeadQuery request, CancellationToken cancellationToken)
 		{
-			var lead = _leadRepository.GetLeadById(request.Id);
-
-			if (lead == null)
-			{
-				return null;
-			}
-
-			return await Task.FromResult(_mapper.Map<LeadDto>(lead));
+			return await _leadRepository.GetLeadByIdAsync(request.Id)
+				.Match(lead => _mapper.Map<LeadDto>(lead), () => null!);
 		}
 	}
 }

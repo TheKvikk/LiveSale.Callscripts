@@ -21,10 +21,37 @@ namespace LiveSale.Callscripts.Api.Configurations.Profiles
 			CreateMap<Image, ImageDto>()
 				.ReverseMap();
 
+			CreateMap<ImageExtra, ImageExtraDto>()
+				.ReverseMap();
+
+			CreateMap<ImageValue, ImageValueDto>()
+				.ReverseMap();
+
 			CreateMap<ImageWithText, ImageWithTextDto>()
 				.ReverseMap();
 
+			CreateMap<ImageWithTextExtra, ImageWithTextExtraDto>()
+				.ReverseMap();
+
+			CreateMap<ImageWithTextValue, ImageWithTextValueDto>()
+				.ReverseMap();
+
 			CreateMap<SimpleText, SimpleTextDto>()
+				.ReverseMap();
+
+			CreateMap<SimpleTextExtra, SimpleTextExtraDto>()
+				.ReverseMap();
+
+			CreateMap<SimpleTextValue, SimpleTextValueDto>()
+				.ReverseMap();
+
+			CreateMap<Range, RangeDto>()
+				.ReverseMap();
+
+			CreateMap<RangeExtra, RangeExtraDto>()
+				.ReverseMap();
+
+			CreateMap<RangeValue, RangeValueDto>()
 				.ReverseMap();
 		}
 	}

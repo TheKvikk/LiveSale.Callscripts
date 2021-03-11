@@ -7,6 +7,17 @@ namespace LiveSale.Callscripts.Core.Models.Leads
 {
 	public class Lead : CallscriptShared
 	{
+		public Lead() { }
+
+		public Lead(CallscriptShared shared)
+		{
+			PaginationType = shared.PaginationType;
+			Theme = shared.Theme;
+			SupportPagesSetting = shared.SupportPagesSetting;
+			IconSet = shared.IconSet;
+			Pages = shared.Pages;
+		}
+
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; init; } = null!;
@@ -23,7 +34,7 @@ namespace LiveSale.Callscripts.Core.Models.Leads
 
 		public State State { get; set; } = State.Created;
 
-		public int ActiveWidgetIndex { get; set; } = 0;
+		public int ActiveWidgetIndex { get; set; }
 
 		public Contact Contact { get; set; } = new();
 	}
