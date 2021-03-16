@@ -14,6 +14,18 @@ namespace LiveSale.Callscripts.Api.Validation
 		{
 			RuleFor(p => p.LeadId)
 				.NotEmpty();
+
+			RuleFor(p => p.WidgetId)
+				.NotEmpty();
+
+			RuleFor(p => p.ActiveWidgetIndex)
+				.NotEqual(0);
+
+			RuleFor(p => new {p.Started, p.Completed})
+				.Must(p => !p.Started && p.Completed)
+				.WithMessage("Lead can not be completed without starting.")
+				.Must(p => !p.Started && !p.Completed)
+				.WithMessage("Lead has to start or compete.");
 		}
 	}
 }

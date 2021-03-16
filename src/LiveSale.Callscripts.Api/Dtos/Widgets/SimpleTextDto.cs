@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace LiveSale.Callscripts.Api.Dtos.Widgets.Visual
+namespace LiveSale.Callscripts.Api.Dtos.Widgets
 {
 	public class SimpleTextDto : WidgetDto, IWidgetExtra<SimpleTextExtraDto>
 	{

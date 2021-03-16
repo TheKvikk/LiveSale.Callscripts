@@ -1,6 +1,5 @@
 using AutoMapper;
 using LiveSale.Callscripts.Api.Dtos.Widgets;
-using LiveSale.Callscripts.Api.Dtos.Widgets.Visual;
 using LiveSale.Callscripts.Core.Models.Widgets;
 using LiveSale.Callscripts.Core.Models.Widgets.Visual;
 

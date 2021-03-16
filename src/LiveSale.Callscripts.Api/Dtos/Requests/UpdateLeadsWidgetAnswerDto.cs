@@ -6,6 +6,8 @@ namespace LiveSale.Callscripts.Api.Dtos.Requests
 
 		public string WidgetId { get; init; } = "";
 
+		public string WidgetType { get; set; } = "";
+
 		public string Extra { get; init; } = "";
 	}
 }

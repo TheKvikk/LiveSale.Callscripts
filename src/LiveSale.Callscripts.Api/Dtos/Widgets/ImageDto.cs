@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace LiveSale.Callscripts.Api.Dtos.Widgets.Visual
+namespace LiveSale.Callscripts.Api.Dtos.Widgets
 {
 	public class ImageDto : WidgetDto, IWidgetExtra<ImageExtraDto>
 	{
@@ -8,7 +8,7 @@ namespace LiveSale.Callscripts.Api.Dtos.Widgets.Visual
 
 		public ImageExtraDto Extra { get; set; } = new();
 	}
-
+	
 	public class ImageExtraDto
 	{
 		public List<ImageValueDto> Values { get; set; } = new();

@@ -3,6 +3,8 @@ namespace LiveSale.Callscripts.Api.Dtos.Requests
 	public class UpdateLeadsStateDto
 	{
 		public string LeadId { get; set; } = "";
+		
+		public string WidgetId { get; set; } = "";
 
 		public int ActiveWidgetIndex { get; set; }
 

@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using LiveSale.Callscripts.Api.Commands;
-using LiveSale.Callscripts.Api.Dtos.Leads;
 using LiveSale.Callscripts.Api.Dtos.Requests;
 using LiveSale.Callscripts.Api.Problems;
 using LiveSale.Callscripts.Api.Queries.Leads;
@@ -122,9 +121,9 @@ namespace LiveSale.Callscripts.Api.Controllers
 			}
 
 			var command = _mapper.Map<UpdateLeadsStateCommand>(dto);
-			await _mediator.Send(command);
+			var updateResponse = await _mediator.Send(command);
 
-			return NoContent();
+			return updateResponse.Match<IActionResult>(_ => NoContent(), BadRequest);
 		}
 	}
 }

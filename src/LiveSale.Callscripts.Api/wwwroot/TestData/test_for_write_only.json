@@ -153,10 +153,10 @@
                 "Firmy"
               ],
               "Values": [
-                20,
+                30,
                 70
               ],
-              "Id": null,
+              "Id": "testId",
               "Order": 1
             }
           }

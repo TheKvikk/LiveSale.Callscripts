@@ -53,7 +53,7 @@ namespace LiveSale.Callscripts.Api
 				{
 					Type = "string",
 					Example = new OpenApiString(
-						"{\n  \"leadId\": \"602a5c68170dfa40b173822a\",\n  \"pageId\": \"60453c4ab5c8894f0493b5e7\",\n  \"widgetId\": \"5fc8ad9c58101c52b9dff004\",\n  \"extra\": \"{\\\"value\\\":{\\\"parts\\\":[\\\"Domácnosti\\\",\\\"Firmy\\\"],\\\"values\\\":[50,50],\\\"id\\\":null,\\\"order\\\":1},\\\"answer\\\":{\\\"parts\\\":[\\\"Domácnosti\\\",\\\"Firmy\\\"],\\\"values\\\":[20,70],\\\"id\\\":null,\\\"order\\\":1}}\"\n}")
+						"{\n  \"leadId\": \"602a5c68170dfa40b173822a\",\n  \"pageId\": \"60453c4ab5c8894f0493b5e7\",\n  \"widgetId\": \"5fc8ad9c58101c52b9dff004\",\n  \"widgetType\": \"range\",\n  \"extra\": \"{\\\"value\\\":{\\\"parts\\\":[\\\"Domácnosti\\\",\\\"Firmy\\\"],\\\"values\\\":[50,50],\\\"id\\\":\\\"testId\\\",\\\"order\\\":1},\\\"answer\\\":{\\\"parts\\\":[\\\"Domácnosti\\\",\\\"Firmy\\\"],\\\"values\\\":[20,70],\\\"id\\\":\\\"testId\\\",\\\"order\\\":1}}\"\n}")
 				});
 			});
 

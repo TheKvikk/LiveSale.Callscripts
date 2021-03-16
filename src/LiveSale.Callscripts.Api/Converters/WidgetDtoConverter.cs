@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using LiveSale.Callscripts.Api.Dtos.Widgets;
-using LiveSale.Callscripts.Api.Dtos.Widgets.Visual;
 
 namespace LiveSale.Callscripts.Api.Converters
 {
@@ -52,7 +51,16 @@ namespace LiveSale.Callscripts.Api.Converters
 				"imagetext" => new ImageWithTextDto(),
 				"image" => new ImageDto(),
 				"range" => new RangeDto(),
-				_ => throw new JsonException()
+				"slider" => new SliderDto(),
+				"text" => new TextBoxDto(),
+				"checkbox" => new CheckboxDto(),
+				"radio" => new RadioDto(),
+				"autocomplete" => new AutocompleteDto(),
+				"ratingmatrix" => new MatrixDto(),
+				"simplechoice" => new SimpleChoiceDto(),
+				"contacts" => new ContactsDto(),
+				"agreements" => new AgreementsDto(),
+				_ => throw new JsonException("Unsupported widget type")
 			};
 
 			while (reader.Read())
@@ -70,13 +78,22 @@ namespace LiveSale.Callscripts.Api.Converters
 					switch (propertyName)
 					{
 						case "Extra":
+							// no need to check for invalid type, this was done while creating variable "widget"
 							var type = widget.Type switch
 							{
 								"simpletext" => typeof(SimpleTextExtraDto),
 								"imagetext" => typeof(ImageWithTextExtraDto),
 								"image" => typeof(ImageExtraDto),
 								"range" => typeof(RangeExtraDto),
-								_ => throw new ArgumentOutOfRangeException()
+								"slider" => typeof(SliderExtraDto),
+								"text" => typeof(TextBoxExtraDto),
+								"checkbox" => typeof(CheckboxExtraDto),
+								"radio" => typeof(RadioExtraDto),
+								"autocomplete" => typeof(AutocompleteExtraDto),
+								"ratingmatrix" => typeof(MatrixExtraDto),
+								"simplechoice" => typeof(SimpleChoiceExtraDto),
+								"contacts" => typeof(ContactsExtraDto),
+								"agreements" => typeof(AgreementsExtraDto)
 							};
 
 							var extra = JsonSerializer.Deserialize(ref reader, type, options);
@@ -102,6 +119,7 @@ namespace LiveSale.Callscripts.Api.Converters
 			throw new JsonException();
 		}
 
+		// TODO rewrite to iterate through properties using Reflection
 		public override void Write(
 			Utf8JsonWriter writer,
 			WidgetDto widget,

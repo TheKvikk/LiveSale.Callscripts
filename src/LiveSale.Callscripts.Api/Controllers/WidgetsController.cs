@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using LiveSale.Callscripts.Api.Dtos.Widgets;
-using LiveSale.Callscripts.Api.Dtos.Widgets.Visual;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiveSale.Callscripts.Api.Controllers
@@ -28,6 +27,23 @@ namespace LiveSale.Callscripts.Api.Controllers
 			},
 			new ImageDto
 			{
+				Extra =
+				{
+					Values =
+					{
+						new ImageValueDto
+						{
+							Id = "adfsd",
+							ImageUrl =
+								"https://images.pexels.com/photos/162140/duckling-birds-yellow-fluffy-162140.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+							Order = 1
+						}
+					}
+				}
+			},
+			new ImageDto
+			{
+				Subtype = "fullscreen",
 				Extra =
 				{
 					Values =
